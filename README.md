@@ -10,6 +10,11 @@ by Junpyo Hong, Wooil Lee, Jongseo Lee, Taesoo Park, and Jinwoo Choi (Kyung Hee 
 >
 > 📄 **Paper:** [OF-CBM — KCC 2026 (camera-ready PDF)](docs/OF-CBM_KCC2026.pdf) · DBpia link coming soon.
 
+<p align="center">
+  <img src="assets/pipeline_overview.png" alt="OF-CBM pipeline overview" width="100%">
+</p>
+<p align="center"><sub>Dense optical flow → FINCH motion concepts → frozen VideoMAE features → concept projection → sparse (GLM-SAGA) classifier.</sub></p>
+
 OF-CBM extends the Concept Bottleneck Model (CBM) framework to video action
 recognition by using **dense optical flow** as the basis for motion concept
 discovery. Instead of relying on predefined concept banks or indirect motion
