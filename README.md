@@ -11,9 +11,9 @@ by Junpyo Hong, Wooil Lee, Jongseo Lee, Taesoo Park, and Jinwoo Choi (Kyung Hee 
 > 📄 **Paper:** [OF-CBM — KCC 2026 (camera-ready PDF)](docs/OF-CBM_KCC2026.pdf) · DBpia link coming soon.
 
 <p align="center">
-  <img src="assets/pipeline_overview.png" alt="OF-CBM pipeline overview" width="100%">
+  <img src="assets/figure1_pipeline.png" alt="OF-CBM pipeline" width="100%">
 </p>
-<p align="center"><sub>Dense optical flow → FINCH motion concepts → frozen VideoMAE features → concept projection → sparse (GLM-SAGA) classifier.</sub></p>
+<p align="center"><sub><b>Figure 1.</b> The OF-CBM pipeline. <b>Stage 1:</b> dense optical flow is extracted per video and clustered (FINCH) into motion concepts, each represented by a flow exemplar. <b>Stage 2:</b> a frozen VideoMAE backbone feeds a trainable concept layer whose activations drive a sparse classifier.</sub></p>
 
 OF-CBM extends the Concept Bottleneck Model (CBM) framework to video action
 recognition by using **dense optical flow** as the basis for motion concept
@@ -215,6 +215,11 @@ steps 3 and 2 respectively. The OF-CBM configuration uses `--train_mode pose`.
 
 ## Visualizing concepts
 
+<p align="center">
+  <img src="assets/figure2_inference.png" alt="OF-CBM test-time inference" width="95%">
+</p>
+<p align="center"><sub><b>Figure 2.</b> Test-time inference. The most-activated motion concept (here, concept 3) is traced back to its optical-flow exemplar, giving a visual explanation for the predicted action.</sub></p>
+
 `visualize_concept_flows.py` renders each discovered concept's medoid as a flow
 image (and optionally a GIF), tracing a prediction back to the motion pattern it
 relied on:
@@ -227,24 +232,6 @@ python visualize_concept_flows.py \
     --output_path figures/kth_concepts.png \
     --save_frames --save_gifs
 ```
-
-## Relation to the DANCE codebase
-
-OF-CBM builds on the CBM training framework from the **DANCE** codebase (Lee et
-al., NeurIPS 2025). This repository has been pared down to exactly what OF-CBM
-needs: a single frozen VideoMAE backbone, optical-flow motion concepts, and the
-KTH / Penn Action benchmarks. The following DANCE components have been **removed**
-(not just disabled), so the code reads as an OF-CBM-only project:
-
-- CLIP / LaViLa / InternVid dual-encoder paths (text/vision concept branches)
-- Skeleton-keypoint based motion discovery
-- Data loaders and training branches for datasets other than KTH / Penn Action
-  (Kinetics, SSV2, UCF, HMDB51, etc.)
-- Error-analysis, t-SNE, and per-object analysis scripts
-
-If you need any of these, start from the original DANCE repository. The data
-loader (`cbm_training/video_dataloader/datasets.py`) now routes only `kth` and
-`penn-action`; add a new `elif` branch there to support another dataset.
 
 ## Citation
 

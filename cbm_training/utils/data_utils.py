@@ -2,9 +2,8 @@ import os
 import torch
 from torchvision import datasets, transforms, models
 
-# NOTE: OF-CBM only uses VideoMAE. CLIP / AIM backbones from the reference
-# DANCE repo are disabled here because they are not part of this paper's
-# pipeline and their modules are intentionally not copied into this repo.
+# NOTE: OF-CBM uses only the VideoMAE backbone. CLIP / AIM backbone support is
+# intentionally not included in this repository.
 # import cbm_training.models.clip as clip
 from cbm_training.video_dataloader.datasets import build_dataset
 import cbm_training.models.modeling_videomae as modeling_finetune
@@ -121,9 +120,8 @@ def get_targets_only(dataset_name,args=None):
 
 def get_target_model(target_name, device,args=None):
 
-    # NOTE: OF-CBM only supports the VideoMAE backbone.  CLIP / AIM branches
-    # from the reference DANCE repo have been removed because those modules
-    # are not part of this paper's pipeline.
+    # NOTE: OF-CBM only supports the VideoMAE backbone; CLIP / AIM branches
+    # have been removed.
     if target_name.startswith("vmae_"):
         target_model = create_model(
             target_name,

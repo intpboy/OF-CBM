@@ -12,7 +12,7 @@ import torch
 from torch.utils.data import DataLoader
 
 # NOTE: OF-CBM uses only the frozen VideoMAE backbone. The CLIP / LaViLa /
-# InternVid dual-encoder helpers from the original DANCE repo are not included.
+# InternVid dual-encoder helpers are not included in this repository.
 
 # Evaluation Metrics
 from sklearn.metrics import (

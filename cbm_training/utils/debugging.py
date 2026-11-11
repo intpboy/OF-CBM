@@ -3,7 +3,7 @@ import torch
 from . import cbm_utils
 from . import data_utils
 
-# CBM_training.model.cbm is a path that exists only in the original DANCE repo and is not included in OF-CBM.
+# CBM_training.model.cbm is not part of OF-CBM (it is not bundled here).
 # debug() / visualize_gif() in this file are never called by the OF-CBM pipeline, so
 # the import failure is ignored.
 try:

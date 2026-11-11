@@ -7,11 +7,8 @@ from torch.utils.data import DataLoader
 from cbm_training.video_dataloader import video_utils
 from cbm_training.utils.cbm_utils import *
 from cbm_training.video_dataloader import datasets
-# NOTE: OF-CBM only uses VideoMAE as the video backbone.
-# The original DANCE repo also supported CLIP/LaViLa dual encoders, but those
-# modules are not included here. If you need them, copy the corresponding
-# files from the reference repo and re-enable the import below.
-# from cbm_training.models.modeling_clip import CLIP
+# NOTE: OF-CBM uses only the VideoMAE backbone. CLIP / LaViLa dual-encoder
+# support is intentionally not included in this repository.
 parser = argparse.ArgumentParser(description='Settings for creating CBM')
 
 # Model parameters
