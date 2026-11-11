@@ -1,8 +1,14 @@
-# OF-CBM: Optical Flow Concept Bottleneck Models for Explainable Video Action Recognition
+# OF-CBM: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition
 
 Reference implementation for the KCC 2026 paper
-**"Optical Flow Concept Bottleneck Models for Explainable Video Action Recognition"**
-by Junpyo Hong, Wooil Lee, and Jinwoo Choi (Kyung Hee University).
+**"OF-CBM: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition"**
+by Junpyo Hong, Wooil Lee, Jongseo Lee, Taesoo Park, and Jinwoo Choi (Kyung Hee University).
+
+> 🏆 **Encouragement Award (Undergraduate Division)** — 2026 Korea Computer Congress (KCC)
+> Undergraduate & Junior Paper Competition, Korean Institute of Information Scientists and
+> Engineers (KIISE), July 2026.
+>
+> 📄 **Paper:** [OF-CBM — KCC 2026 (camera-ready PDF)](docs/OF-CBM_KCC2026.pdf) · DBpia link coming soon.
 
 OF-CBM extends the Concept Bottleneck Model (CBM) framework to video action
 recognition by using **dense optical flow** as the basis for motion concept
@@ -239,9 +245,10 @@ loader (`cbm_training/video_dataloader/datasets.py`) now routes only `kth` and
 
 ```bibtex
 @inproceedings{hong2026ofcbm,
-  title     = {Optical Flow Concept Bottleneck Models for Explainable Video Action Recognition},
-  author    = {Hong, Junpyo and Lee, Wooil and Choi, Jinwoo},
+  title     = {{OF-CBM}: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition},
+  author    = {Hong, Junpyo and Lee, Wooil and Lee, Jongseo and Park, Taesoo and Choi, Jinwoo},
   booktitle = {Proceedings of the Korea Computer Congress (KCC)},
+  note      = {Encouragement Award, Undergraduate \& Junior Paper Competition (KIISE)},
   year      = {2026}
 }
 ```
