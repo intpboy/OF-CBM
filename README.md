@@ -8,7 +8,7 @@ by Junpyo Hong, Wooil Lee, Jongseo Lee, Taesoo Park, and Jinwoo Choi (Kyung Hee 
 > Undergraduate & Junior Paper Competition, Korean Institute of Information Scientists and
 > Engineers (KIISE), July 2026.
 >
-> 📄 **Paper:** [OF-CBM — KCC 2026 (camera-ready PDF)](docs/OF-CBM_KCC2026.pdf) · DBpia link coming soon.
+> 📄 **Paper:** [KCC 2026 (DBpia)](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929954)
 
 <p align="center">
   <img src="assets/figure1_pipeline.png" alt="OF-CBM pipeline" width="100%">
