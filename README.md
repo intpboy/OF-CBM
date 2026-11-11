@@ -239,7 +239,7 @@ python visualize_concept_flows.py \
   title     = {{OF-CBM}: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition},
   author    = {Hong, Junpyo and Lee, Wooil and Lee, Jongseo and Park, Taesoo and Choi, Jinwoo},
   booktitle = {Proceedings of the Korea Computer Congress (KCC)},
-  note      = {Encouragement Award, Undergraduate \& Junior Paper Competition (KIISE)},
+  note      = {Paper Award, KCC 2026 Undergraduate \& Junior Paper Competition (KIISE)},
   year      = {2026}
 }
 ```
