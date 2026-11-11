@@ -1,0 +1,34 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+env/
+
+# ---- OS / editor junk ----
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# ---- Generated pipeline artifacts (recreated by the scripts) ----
+flows/                       # step 1: extracted optical flow .npy files
+concept_discovery/output/    # step 2: discovered concepts
+features/                    # step 3: precomputed VideoMAE features
+result/                      # step 4/5: trained CBMs and baselines
+logs/                        # job logs
+figures/                     # visualization outputs
+output/
+
+# ---- Large binaries ----
+*.pth
+*.pt
+*.npy
+*.pkl
+*.gif
+*.mp4
+
+# ---- Keep annotation files (override the broad rules above) ----
+!datasets/**/*.csv
+!datasets/**/*.txt

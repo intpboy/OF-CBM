@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "OF-CBM: Optical Flow Concept Bottleneck Models for Explainable Video Action Recognition"
+authors:
+  - family-names: Hong
+    given-names: Junpyo
+  - family-names: Lee
+    given-names: Wooil
+  - family-names: Choi
+    given-names: Jinwoo
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "Optical Flow Concept Bottleneck Models for Explainable Video Action Recognition"
+  authors:
+    - family-names: Hong
+      given-names: Junpyo
+    - family-names: Lee
+      given-names: Wooil
+    - family-names: Choi
+      given-names: Jinwoo
+  collection-title: "Proceedings of the Korea Computer Congress (KCC)"
+  year: 2026
