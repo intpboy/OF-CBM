@@ -4,8 +4,7 @@ Reference implementation for the KCC 2026 paper
 **"OF-CBM: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition"**
 by Junpyo Hong, Wooil Lee, Jongseo Lee, Taesoo Park, and Jinwoo Choi (Kyung Hee University).
 
-> 🏆 **Paper Award — 2026 Korea Computer Congress (KCC) Undergraduate & Junior Paper
-> Competition**, Korean Institute of Information Scientists and Engineers (KIISE), July 2026.
+> 🏆 **Paper Award — 2026 Korea Computer Congress (KCC)**, Korean Institute of Information Scientists and Engineers (KIISE), July 2026.
 >
 > 📄 **Paper:** [KCC 2026 (DBpia)](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929954)
 
