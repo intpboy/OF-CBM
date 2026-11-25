@@ -1,17 +1,34 @@
 # OF-CBM: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition
+### KCC 2026
 
-Reference implementation for the KCC 2026 paper
-**"OF-CBM: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition"**
-by Junpyo Hong, Wooil Lee, Jongseo Lee, Taesoo Park, and Jinwoo Choi (Kyung Hee University).
+[![Conference](https://img.shields.io/badge/KCC-2026-red)](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929954) [![Paper](https://img.shields.io/badge/Paper-DBpia-green)](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929954) [![Lab](https://img.shields.io/badge/Vision%20and%20Learning-Lab-orange)](https://vll.khu.ac.kr/) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+**Junpyo Hong**<sup>1</sup>, Wooil Lee<sup>2</sup>, Jongseo Lee<sup>2</sup>, Taesoo Park<sup>2</sup>, Jinwoo Choi<sup>2*</sup>
+
+<sup>1</sup>Department of Artificial Intelligence, Kyung Hee University &nbsp;·&nbsp; <sup>2</sup>School of Computer Engineering, Kyung Hee University &nbsp;·&nbsp; <sup>*</sup>Corresponding author
 
 > 🏆 **Paper Award — 2026 Korea Computer Congress (KCC)**, Korean Institute of Information Scientists and Engineers (KIISE), July 2026.
->
-> 📄 **Paper:** [KCC 2026 (DBpia)](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929954)
+
+---
 
 <p align="center">
   <img src="assets/demo.gif" alt="OF-CBM test-time demo" width="85%">
 </p>
 <p align="center"><sub>For each test video, OF-CBM shows the <b>top-activated motion concept</b> (its optical-flow exemplar) next to the prediction. ▶️ <a href="https://github.com/intpboy/OF-CBM/releases/download/v1.0/OF-CBM_demo.mp4">Full video (MP4, higher quality)</a></sub></p>
+
+---
+
+## ✨ Highlights
+
+- 🌀 Discovers **motion concepts straight from dense optical flow** — no predefined concept banks, text labels, or skeleton keypoints.
+- 🔍 Each concept is a **visual flow exemplar** (cluster medoid), so an explanation shows the *actual motion pattern* the model relied on.
+- 🎞️ Two flow representations — **Raw** (full flow) and **Patched** (16×16 grid) — discovered by **FINCH** with automatic partition selection.
+- 🧩 **Frozen VideoMAE** backbone → trainable concept layer → **sparse (GLM-SAGA)** classifier: interpretable by construction.
+- 📈 Matches the black-box backbone on **KTH** and **Penn Action** while adding concept-level explanations.
+
+---
+
+## 🖼️ Overview
 
 <p align="center">
   <img src="assets/figure1_pipeline.png" alt="OF-CBM pipeline" width="100%">
@@ -24,9 +41,6 @@ discovery. Instead of relying on predefined concept banks or indirect motion
 representations, concepts emerge directly from clustering normalized flow
 fields, producing visually intuitive motion exemplars that can be inspected as
 short flow clips.
-
-The pipeline is a clean four-step process (plus an optional backbone-finetuning
-step and a non-interpretable baseline):
 
 ```
   videos ──► (1) dense optical flow extraction ──► per-video .npy flow arrays
@@ -43,7 +57,9 @@ step and a non-interpretable baseline):
                                    (GLM-SAGA elastic-net)
 ```
 
-## Results
+---
+
+## 📊 Results
 
 Top-1 accuracy (%) reported in the paper. OF-CBM matches the non-interpretable
 backbone while adding concept-based explanations.
@@ -54,85 +70,68 @@ backbone while adding concept-based explanations.
 | OF-CBM (Raw flow)        | 91.77 | 97.00       |
 | OF-CBM (Patched flow)    | 91.77 | 97.19       |
 
-## Repository layout
+---
 
-```
-OF-CBM/
-├── README.md
-├── LICENSE                            # MIT
-├── requirements.txt
-├── flow_extraction/                   # step 1: dense optical flow
-│   └── extract_raft_flow.py
-├── concept_discovery/                 # step 2: motion concepts from flow
-│   ├── motion_discovery/
-│   │   ├── discover_flow_concepts.py      # main entry point
-│   │   ├── flow_subsampling.py            # Raw / Patched flow representations
-│   │   ├── clustering.py                  # FINCH / k-means / SOM
-│   │   └── labeling.py                    # medoid + hard-label generation
-│   └── utils/
-│       ├── finch.py                       # FINCH algorithm
-│       └── cluster_utils.py               # medoid helpers, IO, class mapping
-├── cbm_training/                      # steps 3-4: CBM on VideoMAE features
-│   ├── train_of_cbm.py                    # main training script
-│   ├── feature_extraction/
-│   │   └── save_features.py               # precompute VideoMAE features
-│   ├── models/
-│   │   ├── cbm.py
-│   │   ├── concept_layer.py               # concept projection + classifier
-│   │   ├── modeling_videomae.py           # VideoMAE ViT-B/16
-│   │   └── glm_saga/                      # sparse linear solver
-│   ├── video_dataloader/                  # video I/O and transforms
-│   └── utils/                             # cbm / data / similarity utilities
-├── datasets/                          # annotation files only (no videos)
-│   ├── KTH/           { class_list.txt, train.csv, val.csv }
-│   └── Penn_action/   { class_list.txt, train.csv, val.csv }
-├── scripts/                           # one subdir per benchmark
-│   ├── kth/
-│   │   ├── 01_extract_flow.sh
-│   │   ├── 02_discover_concepts.sh         # Raw flow
-│   │   ├── 02_discover_concepts_patch.sh   # Patched flow
-│   │   ├── 03_extract_backbone_features.sh
-│   │   ├── 04_train_cbm.sh                 # Raw flow
-│   │   ├── 04_train_cbm_patch.sh           # Patched flow
-│   │   └── 05_baseline.sh                  # non-interpretable backbone
-│   └── penn_action/                        # same seven scripts
-└── visualize_concept_flows.py         # render discovered concepts as flow images/GIFs
-```
-
-## Environment
+## 🛠️ Installation
 
 Tested with Python 3.10 + CUDA 11.8.
 
 ```bash
 conda create -n ofcbm python=3.10 -y
 conda activate ofcbm
+
+git clone https://github.com/intpboy/OF-CBM.git && cd OF-CBM
 pip install -r requirements.txt
 ```
 
 Key dependencies: `torch`, `torchvision` (provides RAFT for flow extraction),
 `timm`, `decord`, `opencv-python`, `scikit-learn`, `scikit-image`, `pandas`,
-`matplotlib`, `tqdm` — see `requirements.txt` for the full list. The FINCH
-implementation is bundled in `concept_discovery/utils/finch.py`.
+`matplotlib`, `tqdm`. The FINCH implementation is bundled in
+`concept_discovery/utils/finch.py`.
 
-## Data
+---
+
+## 📁 Project Structure
+
+```bash
+OF-CBM/
+│── flow_extraction/        # step 1: dense optical flow (RAFT)
+│── concept_discovery/      # step 2: motion concepts from flow (FINCH + medoid)
+│   │── motion_discovery/   #   discover_flow_concepts, flow_subsampling, clustering, labeling
+│   └── utils/              #   FINCH algorithm + medoid/IO helpers
+│── cbm_training/           # steps 3-4: CBM on frozen VideoMAE features
+│   │── feature_extraction/ #   precompute VideoMAE features
+│   │── models/             #   cbm, concept_layer, modeling_videomae, glm_saga
+│   │── video_dataloader/   #   video I/O and transforms
+│   └── utils/              #   cbm / data / similarity utilities
+│── datasets/               # annotation files only — no videos (KTH, Penn_action)
+│── scripts/                # one subdir per benchmark (kth/, penn_action/): steps 01-05
+│── visualize_concept_flows.py   # render discovered concepts as flow images / GIFs
+│── requirements.txt
+└── README.md
+```
+
+---
+
+## 📂 Data
 
 This repository ships **annotation files only** — download the raw videos from
 the official sources and point the scripts at them:
 
-- **KTH** — https://www.csc.kth.se/cvap/actions/ (6 action classes, 599 videos)
-- **Penn Action** — http://dreamdragon.github.io/PennAction/ (15 classes, 2,326 videos)
+- [**KTH Action**](https://www.csc.kth.se/cvap/actions/) — 6 action classes, 599 videos
+- [**Penn Action**](http://dreamdragon.github.io/PennAction/) — 15 classes, 2,326 videos
 
 Each `datasets/<name>/{train,val}.csv` has rows of `video_filename,label_index`,
 and `class_list.txt` maps each label index (by line order) to a class name.
 
-### Backbone checkpoint
+**Backbone checkpoint.** Steps 3–5 require a **VideoMAE ViT-B/16** checkpoint
+(Kinetics-400 pretrained, optionally fine-tuned on the target dataset). Produce
+or download one with the official [VideoMAE](https://github.com/MCG-NJU/VideoMAE)
+repository and pass its path via `FINETUNE_PATH`.
 
-Steps 3–5 require a **VideoMAE ViT-B/16** checkpoint. We use the Kinetics-400
-pretrained model (optionally fine-tuned on the target dataset). Produce or
-download a checkpoint with the official VideoMAE repository
-(https://github.com/MCG-NJU/VideoMAE) and pass its path via `FINETUNE_PATH`.
+---
 
-## Running a full experiment
+## 🚀 Running the pipeline
 
 Every script is plain `bash` and reads its paths from environment variables, so
 nothing needs to be edited for a new machine. KTH example:
@@ -162,31 +161,32 @@ The same seven scripts exist under `scripts/penn_action/`. Common overrides:
 `FLOW_DIR`, `FEAT_DIR`, `CONCEPT_DIR`, `BACKBONE_FEATS`, `SAVE_DIR` (see the
 header of each script for its defaults).
 
-## Flow representations
+---
 
-Two flow representations are implemented in
+## 🌀 Flow representations
+
+Two representations are implemented in
 `concept_discovery/motion_discovery/flow_subsampling.py`:
 
-- **Raw** — the full normalized flow tensor is flattened into a single
+- **Raw** — the full normalized flow tensor is flattened into one
   high-dimensional vector per video. Preserves fine spatial detail; well suited
   to datasets with well-localized motion (e.g. KTH).
 - **Patched** — the flow is divided into a `P×P` patch grid (default `P=16`,
   i.e. 14×14 patches at 224×224) and each patch is summarized by its mean
-  `(dx, dy)`. This reduces the feature dimensionality by roughly `256×`,
-  trading fine detail for robustness on larger / higher-resolution datasets.
+  `(dx, dy)`, cutting the feature dimensionality by roughly `256×`.
 
-Both strategies normalize each sample by its peak magnitude so that flow vectors
-lie in `[-1, 1]`, making clustering invariant to absolute motion speed.
+Both normalize each sample by its peak magnitude so that flow vectors lie in
+`[-1, 1]`, making clustering invariant to absolute motion speed.
 
-### Optical flow is pluggable
+> **Optical flow is pluggable.** The paper extracts flow with **WAFT**. This repo
+> ships a self-contained **RAFT** extractor (`flow_extraction/extract_raft_flow.py`,
+> via torchvision) so the pipeline runs out of the box. Any dense-flow method can
+> be substituted — the only contract is that each video becomes one `.npy` array
+> of shape `(L-1, H, W, 2)` holding `(dx, dy)` in pixels.
 
-The paper extracts flow with **WAFT**. This repository ships a self-contained
-**RAFT** extractor (`flow_extraction/extract_raft_flow.py`, via torchvision) so
-the pipeline runs out of the box. Any dense-flow method can be substituted — the
-only contract is that each video becomes one `.npy` array of shape
-`(L-1, H, W, 2)` with the last dimension holding `(dx, dy)` in pixels.
+---
 
-## Concept discovery
+## 🔎 Concept discovery
 
 `discover_flow_concepts.py` runs the discovery stage:
 
@@ -198,12 +198,13 @@ only contract is that each video becomes one `.npy` array of shape
    intra-cluster distances) as its visual representative.
 4. Assign validation samples by nearest medoid (`--train_only`) to avoid data
    leakage.
-5. Emit the per-video concept labels (`hard_label_train.pkl` /
-   `hard_label_val.pkl`) along with `sequence_cluster_map.json`,
-   `concept_index.txt`, and `video_attributes.json` under a
-   `<N>concepts_<timestamp>_trainonly/` directory.
+5. Emit per-video concept labels (`hard_label_train.pkl` / `hard_label_val.pkl`)
+   plus `sequence_cluster_map.json`, `concept_index.txt`, and
+   `video_attributes.json` under a `<N>concepts_<timestamp>_trainonly/` directory.
 
-## CBM training
+---
+
+## 🎓 CBM training
 
 `train_of_cbm.py` learns a two-stage CBM on top of frozen VideoMAE features:
 
@@ -216,7 +217,9 @@ only contract is that each video becomes one `.npy` array of shape
 `--backbone_features` and `--pose_label` point to the artifacts produced by
 steps 3 and 2 respectively. The OF-CBM configuration uses `--train_mode pose`.
 
-## Visualizing concepts
+---
+
+## 🎬 Interpretability
 
 <p align="center">
   <img src="assets/figure2_inference.png" alt="OF-CBM test-time inference" width="95%">
@@ -236,18 +239,21 @@ python visualize_concept_flows.py \
     --save_frames --save_gifs
 ```
 
-## Citation
+---
+
+## 📎 Citation
 
 ```bibtex
 @inproceedings{hong2026ofcbm,
   title     = {{OF-CBM}: Optical Flow-Based Concept Bottleneck Models for Explainable Video Action Recognition},
   author    = {Hong, Junpyo and Lee, Wooil and Lee, Jongseo and Park, Taesoo and Choi, Jinwoo},
   booktitle = {Proceedings of the Korea Computer Congress (KCC)},
-  note      = {Paper Award, KCC 2026 Undergraduate \& Junior Paper Competition (KIISE)},
   year      = {2026}
 }
 ```
 
-## License
+---
 
-Released under the MIT License — see [LICENSE](LICENSE).
+## 📜 License
+
+Released under the [MIT License](LICENSE).
