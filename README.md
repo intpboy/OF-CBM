@@ -9,6 +9,11 @@ by Junpyo Hong, Wooil Lee, Jongseo Lee, Taesoo Park, and Jinwoo Choi (Kyung Hee 
 > 📄 **Paper:** [KCC 2026 (DBpia)](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12929954)
 
 <p align="center">
+  <img src="assets/demo.gif" alt="OF-CBM test-time demo" width="85%">
+</p>
+<p align="center"><sub>For each test video, OF-CBM shows the <b>top-activated motion concept</b> (its optical-flow exemplar) next to the prediction. ▶️ <a href="https://github.com/intpboy/OF-CBM/releases/download/v1.0/OF-CBM_demo.mp4">Full video (MP4, higher quality)</a></sub></p>
+
+<p align="center">
   <img src="assets/figure1_pipeline.png" alt="OF-CBM pipeline" width="100%">
 </p>
 <p align="center"><sub><b>Figure 1.</b> The OF-CBM pipeline. <b>Stage 1:</b> dense optical flow is extracted per video and clustered (FINCH) into motion concepts, each represented by a flow exemplar. <b>Stage 2:</b> a frozen VideoMAE backbone feeds a trainable concept layer whose activations drive a sparse classifier.</sub></p>
@@ -37,13 +42,6 @@ step and a non-interpretable baseline):
                                (4) concept projection + sparse classifier
                                    (GLM-SAGA elastic-net)
 ```
-
-## Demo
-
-<p align="center">
-  <img src="assets/demo.gif" alt="OF-CBM test-time demo" width="85%">
-</p>
-<p align="center"><sub>For each test video, OF-CBM shows the <b>top-activated motion concept</b> (its optical-flow exemplar) next to the prediction. ▶️ <a href="https://github.com/intpboy/OF-CBM/releases/download/v1.0/OF-CBM_demo.mp4">Full video (MP4, with higher quality)</a></sub></p>
 
 ## Results
 
