@@ -29,9 +29,10 @@ output/
 *.gif
 *.mp4
 
-# ---- Keep annotation files (override the broad rules above) ----
+# ---- Keep annotation files + README assets (override the broad rules above) ----
 !datasets/**/*.csv
 !datasets/**/*.txt
+!assets/demo.gif
 
 # Personal / award photos (not part of the code release)
 *.HEIC

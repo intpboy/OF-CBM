@@ -38,6 +38,13 @@ step and a non-interpretable baseline):
                                    (GLM-SAGA elastic-net)
 ```
 
+## Demo
+
+<p align="center">
+  <img src="assets/demo.gif" alt="OF-CBM test-time demo" width="85%">
+</p>
+<p align="center"><sub>For each test video, OF-CBM shows the <b>top-activated motion concept</b> (its optical-flow exemplar) next to the prediction. ▶️ <a href="https://github.com/intpboy/OF-CBM/releases/download/v1.0/OF-CBM_demo.mp4">Full video (MP4, with higher quality)</a></sub></p>
+
 ## Results
 
 Top-1 accuracy (%) reported in the paper. OF-CBM matches the non-interpretable
